@@ -14,7 +14,9 @@ repositories {
 
 dependencies {
 	// tag::actuator[]
+	implementation("net.sf.ehcache:ehcache")
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	// end::actuator[]
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
