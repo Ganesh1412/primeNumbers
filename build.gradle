@@ -44,8 +44,9 @@ dependencies {
 	// For marshalling/unmarshalling JodaTime
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.7')
 
-
-	compile group: 'com.amazonaws.serverless', name: 'aws-serverless-java-container-spring', version: '1.5.2'
+	compile group: 'com.amazonaws.serverless', name: 'aws-serverless-java-container-springboot2', version: '1.5'
+	compile("org.yaml:snakeyaml:1.27")
+	//compile group: 'com.amazonaws.serverless', name: 'aws-serverless-java-container-spring', version: '1.5.2'
 
 	compile("net.sf.ehcache:ehcache:2.10.5")
 	compile("org.springframework.boot:spring-boot-starter-actuator:2.1.1.RELEASE")
@@ -62,4 +63,17 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+task buildZipFull(type: Zip) {
+	baseName = "serverless-java-spring-boot"
+	from compileJava
+	from processResources
+	into('lib') {
+		from(configurations.compileClasspath) {
+			exclude 'tomcat-embed-*'
+		}
+	}
+}
+
+build.dependsOn buildZipFull
 

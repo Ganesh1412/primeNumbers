@@ -1,7 +1,8 @@
 spring:
-  application:
-    name: primeNumberSample
   web:
     resources:
       cache:
         period: 60m
+logging:
+  level:
+    root: INFO
